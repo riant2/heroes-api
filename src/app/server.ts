@@ -1,7 +1,8 @@
+import { json, urlencoded } from "body-parser";
+import * as cors from "cors";
 import * as express from "express";
-import { urlencoded, json } from "body-parser";
-import * as morgan from "morgan";
 import { connect } from "mongoose";
+import * as morgan from "morgan";
 import { HeroController } from "./heroes/hero.controller";
 
 const app: express.Express = express(); // create our app w/ express
@@ -10,9 +11,10 @@ const app: express.Express = express(); // create our app w/ express
 // configuration =================
 
 connect(
-  "mongodb+srv://heroes:9S3Dfq3CukgLQCJm@cluster0-ttlhu.mongodb.net/test?retryWrites=true"
-).then(console.log); // connect to mongoDB database on modulus.io
+  "mongodb+srv://heroes:9S3Dfq3CukgLQCJm@cluster0-ttlhu.mongodb.net/heroes?retryWrites=true"
+).then(result => console.log(result)); // connect to mongoDB database on modulus.io
 
+app.use(cors({ origin: "http://localhost:4200" }));
 app.use(express.static(__dirname + "/public")); // set the static files location /public/img will be /img for users
 app.use(morgan("dev")); // log every request to the console
 app.use(urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
