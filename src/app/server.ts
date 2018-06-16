@@ -2,9 +2,10 @@ import * as express from "express";
 import { urlencoded, json } from "body-parser";
 import * as morgan from "morgan";
 import { connect } from "mongoose";
+import { HeroController } from "./heroes/hero.controller";
 
-const app = express(); // create our app w/ express
-//var methodOverride = require("method-override"); // simulate DELETE and PUT (express4)
+const app: express.Express = express(); // create our app w/ express
+// var methodOverride = require("method-override"); // simulate DELETE and PUT (express4)
 
 // configuration =================
 
@@ -19,7 +20,8 @@ app.use(json()); // parse application/json
 app.use(json({ type: "application/vnd.api+json" })); // parse application/vnd.api+json as json
 // app.use(methodOverride());
 
-app.get("/hero", hero);
+app.get("/hero", HeroController.list);
+app.get("/hero/:id", HeroController.byId);
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);
