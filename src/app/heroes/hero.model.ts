@@ -1,3 +1,3 @@
-import {model} from "mongoose";
+import { model } from "mongoose";
 
-model.;
+model("hero", {});

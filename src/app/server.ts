@@ -19,6 +19,8 @@ app.use(json()); // parse application/json
 app.use(json({ type: "application/vnd.api+json" })); // parse application/vnd.api+json as json
 // app.use(methodOverride());
 
+app.get("/hero", hero);
+
 // listen (start app with node server.js) ======================================
 app.listen(8080);
 console.log("App listening on port 8080");
