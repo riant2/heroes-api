@@ -9,10 +9,11 @@ const app: express.Express = express(); // create our app w/ express
 // var methodOverride = require("method-override"); // simulate DELETE and PUT (express4)
 
 // configuration =================
+console.log("Starting application");
 
 connect(
   "mongodb+srv://heroes:9S3Dfq3CukgLQCJm@cluster0-ttlhu.mongodb.net/heroes?retryWrites=true"
-).then(result => console.log(result)); // connect to mongoDB database on modulus.io
+).then(result => console.log("Connected to MongoDB")); // connect to mongoDB database on modulus.io
 
 app.use(cors({ origin: "http://localhost:4200" }));
 app.use(express.static(__dirname + "/public")); // set the static files location /public/img will be /img for users
@@ -23,7 +24,10 @@ app.use(json({ type: "application/vnd.api+json" })); // parse application/vnd.ap
 // app.use(methodOverride());
 
 app.get("/hero", HeroController.list);
+app.post("/hero", HeroController.create);
+app.put("/hero", HeroController.update);
 app.get("/hero/:id", HeroController.byId);
+app.delete("/hero/:id", HeroController.delete);
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);
