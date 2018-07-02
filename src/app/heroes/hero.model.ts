@@ -16,6 +16,8 @@ export interface Hero {
     critDamage: number;
     health: number;
     holyDamage: number;
+    level: number;
+    power: number;
     precision: number;
     reduceDamage: number;
     skillDamage: number;
@@ -39,6 +41,8 @@ const schema: Schema = new Schema({
     critDamage: Number,
     health: Number,
     holyDamage: Number,
+    level: Number,
+    power: Number,
     precision: Number,
     reduceDamage: Number,
     skillDamage: Number,

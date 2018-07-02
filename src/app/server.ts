@@ -4,6 +4,7 @@ import * as express from "express";
 import { connect } from "mongoose";
 import * as morgan from "morgan";
 import { HeroController } from "./heroes/hero.controller";
+import { Routes } from "./routes";
 
 const app: express.Express = express(); // create our app w/ express
 // var methodOverride = require("method-override"); // simulate DELETE and PUT (express4)
@@ -23,11 +24,13 @@ app.use(json()); // parse application/json
 app.use(json({ type: "application/vnd.api+json" })); // parse application/vnd.api+json as json
 // app.use(methodOverride());
 
-app.get("/hero", HeroController.list);
-app.post("/hero", HeroController.create);
-app.put("/hero", HeroController.update);
-app.get("/hero/:id", HeroController.byId);
-app.delete("/hero/:id", HeroController.delete);
+const routes = new Routes(app);
+routes
+  .get("/hero", HeroController.list)
+  .post("/hero", HeroController.create)
+  .put("/hero", HeroController.update)
+  .get("/hero/:id", HeroController.byId)
+  .delete("/hero/:id", HeroController.delete);
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);
